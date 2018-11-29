@@ -18,6 +18,6 @@ If you want to modify the images first update the ./gallery folder with the imag
 To use this image, just do:
 
     docker build -t sam-rowe/fgallery .
-    docker run -t sam-rowe/fgallery -p 8080:80
+    docker run -p 8080:80 -t sam-rowe/fgallery 
 
 
