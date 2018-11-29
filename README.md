@@ -8,13 +8,16 @@ with the images displayed in a slideshow. It can be found at:
 
 http://www.thregr.org/~wavexx/software/fgallery/
 
+This fork is inteded to create a simple container that exposes http port and serves the newly created site on port 80
+
 Usage
 -----
 
+If you want to modify the images first update the ./gallery folder with the images you want to include
+
 To use this image, just do:
 
-    docker build -t stavrosk/fgallery .
-    docker run -i -v <mountpath>:/fgallery/gallery/ -t stavrosk/fgallery
+    docker build -t sam-rowe/fgallery .
+    docker run -t sam-rowe/fgallery -p 8080:80
 
-That will mount "mountpath" in the container and allow you to run fgallery on it. Just move the output directory to
-mountpath when done, and you'll have the resulting gallery ready to use.
+
