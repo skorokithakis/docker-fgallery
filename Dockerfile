@@ -1,9 +1,12 @@
-FROM ubuntu:precise
+FROM ubuntu:bionic
 
 EXPOSE 80
 
-RUN apt-get -y update
-RUN apt-get -y install imagemagick exiftran zip liblcms2-utils libimage-exiftool-perl libjson-perl libjson-xs-perl jpegoptim pngcrush p7zip python-opencv libopencv-dev unp unzip fish wget python-numpy nginx
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt -y update
+RUN apt -y install tzdata
+RUN apt -y install imagemagick exiftran zip liblcms2-utils libimage-exiftool-perl libjson-perl libjson-xs-perl jpegoptim pngcrush p7zip python-opencv libopencv-dev unp unzip fish wget python-numpy nginx
 
 RUN wget --no-check-certificate http://www.thregr.org/~wavexx/software/fgallery/releases/fgallery-LATEST.zip
 RUN unp fgallery-LATEST.zip
@@ -21,6 +24,7 @@ RUN ./fgallery gallery dist
 
 WORKDIR /fgallery/dist/
 
-RUN cp -R /fgallery/dist/* /usr/share/nginx/www/
+RUN rm -rf /var/www/html/*
+RUN cp -R /fgallery/dist/* /var/www/html/
 #CMD ["/bin/bash"]
 CMD ["nginx", "-g", "daemon off;"]
