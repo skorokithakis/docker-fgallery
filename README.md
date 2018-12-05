@@ -8,7 +8,9 @@ with the images displayed in a slideshow. It can be found at:
 
 http://www.thregr.org/~wavexx/software/fgallery/
 
-This fork is inteded to create a simple container that exposes http port and serves the newly created site on port 80
+This fork is inteded to create a simple container that exposes http port and serves the newly created site on port 80.
+
+The gallery folder contains the images you want in the gallery in this fork. 
 
 Usage
 -----
