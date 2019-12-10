@@ -1,0 +1,26 @@
+## Azure DevOps pipeline to build and push docker image to DockerHub. 
+## I usually push to Azure Container Registry but this is open source project so might as well
+## make the container image public as well as source.
+pool:
+  vmImage: 'ubuntu-18.04'
+
+resources:
+  repositories:
+    - repository: dockerfgallery 
+      type: github
+      name: Sam-Rowe/docker-fgallery
+      endpoint: GitHub-Demo-Connection
+
+jobs:
+  - job: build
+    steps:
+    - checkout: dockerfgallery
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Demos-samuelrowe-ms'
+        repository: 'samuelroweuk/gallery'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
