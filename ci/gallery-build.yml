@@ -15,26 +15,21 @@ jobs:
   - job: build
     steps:
     - checkout: dockerfgallery
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Demos-samuelrowe-ms'
-        repository: 'samuelroweuk/gallery'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: |
-          $(Build.BuildId)
-          latest
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'Demos-samuelrowe-ms'
+    #     repository: 'samuelroweuk/gallery'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Dockerfile'
+    #     tags: |
+    #       $(Build.BuildId)
+    #       latest
     - task: Bash@3
       inputs:
         targetType: 'inline'
         script: sed -i -E 's/:latest\s/:$(Build.BuildId)/g' $(Build.Repository.LocalPath)/k8s/gallery-deployment.yml
-    - task: CopyFiles@2
-      inputs:
-        contents: '$(Build.Repository.LocalPath)/k8s/**'
-        targetFolder: $(Build.ArtifactStagingDirectory)
-      condition: always()
     - task: PublishBuildArtifacts@1
       inputs:
-        pathToPublish: $(Build.ArtifactStagingDirectory)
+        pathToPublish: $(Build.Repository.LocalPath)
         artifactName: gallery-k8s
       condition: always()
