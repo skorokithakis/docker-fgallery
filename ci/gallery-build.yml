@@ -24,3 +24,15 @@ jobs:
         tags: |
           $(Build.BuildId)
           latest
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: sed -i -E 's/:latest\s/:$(Build.BuildId)/g' ./k8s/gallery-deployment.yml
+    - task: CopyFiles@2
+      inputs:
+        contents: 'k8s/**'
+        targetFolder: $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: gallery-k8s

@@ -23,3 +23,7 @@ To use this image, just do:
     docker run -p 8080:80 -t sam-rowe/fgallery 
 
 
+Alternative usage
+-----------------
+
+The ci folder has a build pipeline for Azure DevOps that builds the container image and pushes to docker hub. It also publishes a k8s deployment + service definition that can be used to deploy on AKS. 
