@@ -15,15 +15,15 @@ jobs:
   - job: build
     steps:
     - checkout: dockerfgallery
-    # - task: Docker@2
-    #   inputs:
-    #     containerRegistry: 'Demos-samuelrowe-ms'
-    #     repository: 'samuelroweuk/gallery'
-    #     command: 'buildAndPush'
-    #     Dockerfile: '**/Dockerfile'
-    #     tags: |
-    #       $(Build.BuildId)
-    #       latest
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Demos-samuelrowe-ms'
+        repository: 'samuelroweuk/gallery'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
     - task: Bash@3
       inputs:
         targetType: 'inline'
