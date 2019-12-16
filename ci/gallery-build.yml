@@ -32,9 +32,9 @@ jobs:
       inputs:
         contents: 'k8s/**'
         targetFolder: $(Build.ArtifactStagingDirectory)
-        condition: always()
+      condition: always()
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(Build.ArtifactStagingDirectory)
         artifactName: gallery-k8s
-        condition: always()
+      condition: always()
